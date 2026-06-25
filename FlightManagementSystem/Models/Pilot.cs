@@ -7,5 +7,5 @@ public class Pilot
     public string PilotPhone { get; set; }  //User Input
     public string LicenseNumber { get; set; } //User input
     public int FlightHours  { get; set; } //User input 
-    public bool IsAvailable { get; set; } = true; //default value
+    public bool IsAvailable { get; set; } //default value
 }
