@@ -42,6 +42,9 @@ class Program
                 case 1:
                     RegisterPassenger();
                     break;
+                case 2:
+                    AddAircraft();
+                    break;
                 case 0: 
                     interacting = false;
                     break;
@@ -76,6 +79,10 @@ class Program
         //Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers[DbContext.Passengers.Count()-1].PassengerId}");
         Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers.Count()}");
         Thread.Sleep(2000);
+    }
+
+    public static void AddAircraft()
+    {
     }
 
     static void Main(string[] args)
