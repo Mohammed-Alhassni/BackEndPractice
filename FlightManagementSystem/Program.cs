@@ -105,6 +105,27 @@ class Program
 
     public static void RegisterPilot()
     {
+        Console.Write("Enter Pilot Name: ");
+        string name = Console.ReadLine();
+        Console.Write("Enter Pilot Phone Number: ");
+        string phone = Console.ReadLine();
+        Console.Write("Enter License Number: ");
+        string licenseNum = Console.ReadLine();
+        Console.Write("Enter Flight Hours: ");
+        int flightHrs = int.Parse(Console.ReadLine());
+        
+        DbContext.Pilots.Add(new Pilot()
+        {
+            PilotId =  DbContext.Pilots.Count() + 1,
+            PilotName = name,
+            PilotPhone = phone,
+            LicenseNumber = licenseNum,
+            FlightHours = flightHrs,
+        });
+        
+        //Console.WriteLine($"Pilot Added: ID: {DbContext.Pilots[DbContext.Pilots.Count()-1].PilotId}");
+        Console.WriteLine($"Pilot Added: ID: {DbContext.Pilots.Count()}");
+        Thread.Sleep(2000);
     } 
 
     static void Main(string[] args)
