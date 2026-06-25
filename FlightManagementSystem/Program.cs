@@ -83,6 +83,22 @@ class Program
 
     public static void AddAircraft()
     {
+        Console.Write("Enter Aircraft Model: ");
+        string model = Console.ReadLine();
+        Console.Write("Enter Total Seats: ");
+        int seats = int.Parse(Console.ReadLine());
+        
+        DbContext.Aircrafts.Add(new Aircraft()
+        {
+            AircraftId = DbContext.Aircrafts.Count() + 1,
+            Model = model,
+            TotalSeats = seats,
+            IsOperational = true,
+        });
+        
+        //Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts[DbContext.Aircrafts.Count()-1].AircraftId}");
+        Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts.Count()}");
+        Thread.Sleep(2000);
     }
 
     static void Main(string[] args)
