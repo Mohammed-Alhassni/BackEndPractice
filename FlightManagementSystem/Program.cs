@@ -13,6 +13,21 @@ class Program
         Pilots = new List<Pilot>()
     };
 
+    public void HomeMenu()
+    {
+        
+        Console.WriteLine($"""
+                           1. Register a Passenger
+                           2. Add an Aircraft
+                           3. Register a Pilot
+                           4. View All Flights
+                           5. Schedule a Flight
+                           6. Book a Flight
+                           7. Cancel a Booking
+                           8. Depart a Flight
+                           """);
+    }
+
     static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
