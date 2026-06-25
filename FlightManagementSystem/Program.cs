@@ -48,6 +48,9 @@ class Program
                 case 3:
                     RegisterPilot();
                     break;
+                case 4:
+                    ViewFlights();
+                    break;
                 case 0: 
                     interacting = false;
                     break;
@@ -128,6 +131,10 @@ class Program
         Thread.Sleep(2000);
     } 
 
+    public static void ViewFlights()
+    {
+    }
+    
     static void Main(string[] args)
     {
         HomeMenu();
