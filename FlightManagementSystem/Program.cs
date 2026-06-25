@@ -93,7 +93,6 @@ class Program
             AircraftId = DbContext.Aircrafts.Count() + 1,
             Model = model,
             TotalSeats = seats,
-            IsOperational = true,
         });
         
         //Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts[DbContext.Aircrafts.Count()-1].AircraftId}");
