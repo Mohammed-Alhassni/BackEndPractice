@@ -40,7 +40,7 @@ class Program
             switch (option)
             {
                 case 1:
-
+                    RegisterPassenger();
                     break;
                 case 0: 
                     interacting = false;
@@ -48,6 +48,34 @@ class Program
             }
             
         }
+    }
+
+    public static void RegisterPassenger()
+    {
+        Console.Write("Enter Passenger Name: ");
+        String name = Console.ReadLine();
+        Console.Write("Enter Passenger Email: ");
+        String email = Console.ReadLine();
+        Console.Write("Enter Passenger Phone Number: ");
+        String phone = Console.ReadLine();
+        Console.Write("Enter Passenger Passenger Number: ");
+        String passNum = Console.ReadLine();
+        Console.Write("Enter Passenger Nationality: ");
+        String nationality = Console.ReadLine();
+        
+        DbContext.Passengers.Add(new Passenger()
+        {
+            PassengerId = DbContext.Passengers.Count() + 1,
+            PassengerName = name,
+            PassengerEmail = email,
+            PassengerPhone = phone,
+            PassportNumber = passNum,
+            Nationality = nationality,
+        });
+        
+        //Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers[DbContext.Passengers.Count()-1].PassengerId}");
+        Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers.Count()}");
+        Thread.Sleep(2000);
     }
 
     static void Main(string[] args)
