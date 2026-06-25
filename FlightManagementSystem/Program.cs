@@ -13,23 +13,45 @@ class Program
         Pilots = new List<Pilot>()
     };
 
-    public void HomeMenu()
+    public static void HomeMenu()
     {
-        
-        Console.WriteLine($"""
-                           1. Register a Passenger
-                           2. Add an Aircraft
-                           3. Register a Pilot
-                           4. View All Flights
-                           5. Schedule a Flight
-                           6. Book a Flight
-                           7. Cancel a Booking
-                           8. Depart a Flight
-                           """);
+        bool interacting = true;
+        int option;
+
+        while (interacting)
+        {
+            Console.Clear();
+            Console.WriteLine($"""
+                               
+                               1. Register a Passenger
+                               2. Add an Aircraft
+                               3. Register a Pilot
+                               4. View All Flights
+                               5. Schedule a Flight
+                               6. Book a Flight
+                               7. Cancel a Booking
+                               8. Depart a Flight
+                               
+                               """); 
+            
+            Console.Write("select option: ");
+            option = int.Parse(Console.ReadLine() ?? "0");
+            
+            switch (option)
+            {
+                case 1:
+
+                    break;
+                case 0: 
+                    interacting = false;
+                    break;
+            }
+            
+        }
     }
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        HomeMenu();
     }
 }
