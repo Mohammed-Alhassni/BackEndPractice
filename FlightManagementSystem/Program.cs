@@ -45,6 +45,9 @@ class Program
                 case 2:
                     AddAircraft();
                     break;
+                case 3:
+                    RegisterPilot();
+                    break;
                 case 0: 
                     interacting = false;
                     break;
@@ -99,6 +102,10 @@ class Program
         Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts.Count()}");
         Thread.Sleep(2000);
     }
+
+    public static void RegisterPilot()
+    {
+    } 
 
     static void Main(string[] args)
     {
