@@ -133,6 +133,13 @@ class Program
 
     public static void ViewFlights()
     {
+        foreach (Flight flight in DbContext.Flights)
+        {
+            Console.WriteLine($"Flight ID: {flight.FlightId}, Flight Code: {flight.FlightCode}, Aircraft ID: {flight.AircraftId}, Pilot ID: {flight.PilotId}," +
+                              $" Origin: {flight.Origin}, Destination: {flight.Destination}, Departure Date: {flight.DepartureDate}, Departure Time: {flight.DepartureTime}," +
+                              $" Ticket Price: {flight.TicketPrice}, Available Seats: {flight.AvailableSeats},  Status: {flight.Status}");
+            Console.ReadKey();
+        }
     }
     
     static void Main(string[] args)
