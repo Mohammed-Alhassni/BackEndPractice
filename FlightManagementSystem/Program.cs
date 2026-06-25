@@ -144,6 +144,22 @@ class Program
     
     static void Main(string[] args)
     {
+        //Data seed 
+        DbContext.Flights.Add(new Flight()
+        {
+            FlightId = 1,
+            FlightCode = "AA-101",
+            AircraftId = 1, 
+            PilotId = 1,   
+            Origin = "JFK",
+            Destination = "LAX",
+            DepartureDate= "2015",
+            DepartureTime = "12am",
+            TicketPrice = 250.00m, 
+            AvailableSeats = 180,
+            Status = "Scheduled"
+        });
+        
         HomeMenu();
     }
 }
