@@ -14,6 +14,13 @@ class Program
         Pilots = new List<Pilot>()
     };
 
+    public static void DelayedMessage(string msg, int delay= 2000)
+    {
+        //delay console clear so the message can stay longer 
+        Console.WriteLine(msg);
+        Thread.Sleep(delay);
+    }
+        
     public static void HomeMenu()
     {
         bool interacting = true;
@@ -84,10 +91,8 @@ class Program
             Nationality = nationality,
         });
         
-        //Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers[DbContext.Passengers.Count()-1].PassengerId}");
-        Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers.Count()}");
-        //delay console clear so the message can stay longer 
-        Thread.Sleep(2000);
+        DelayedMessage($"Passenger Added: ID: {DbContext.Passengers.Count()}");
+        //DelayedMessage($"Passenger Added: ID: {DbContext.Passengers[DbContext.Passengers.Count()-1].PassengerId}");
     }
 
     public static void AddAircraft()
@@ -105,10 +110,9 @@ class Program
             TotalSeats = seats,
         });
         
-        //Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts[DbContext.Aircrafts.Count()-1].AircraftId}");
-        Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts.Count()}");
-        //delay console clear so the message can stay longer 
-        Thread.Sleep(2000);
+        
+        //DelayedMessage($"Aircraft Added: ID: {DbContext.Aircrafts[DbContext.Aircrafts.Count()-1].AircraftId}");
+        DelayedMessage($"Aircraft Added: ID: {DbContext.Aircrafts.Count()}");
     }
 
     public static void RegisterPilot()
@@ -131,10 +135,8 @@ class Program
             FlightHours = flightHrs,
         });
         
-        //Console.WriteLine($"Pilot Added: ID: {DbContext.Pilots[DbContext.Pilots.Count()-1].PilotId}");
-        Console.WriteLine($"Pilot Added: ID: {DbContext.Pilots.Count()}");
-        //delay console clear so the message can stay longer 
-        Thread.Sleep(2000);
+        //DelayedMessage($"Pilot Added: ID: {DbContext.Pilots[DbContext.Pilots.Count()-1].PilotId}");
+        DelayedMessage($"Pilot Added: ID: {DbContext.Pilots.Count()}");
     } 
 
     public static void ViewFlights()
