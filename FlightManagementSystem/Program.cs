@@ -60,6 +60,9 @@ class Program
                 case 4:
                     ViewFlights();
                     break;
+                case 5:
+                    ScheduleFlight();
+                    break;
                 case 0: 
                     interacting = false;
                     break;
@@ -202,6 +205,10 @@ class Program
         //press key to exit 
         Console.Write("Press any key to continue...");
         Console.ReadKey();
+    }
+
+    public static void ScheduleFlight()
+    {
     }
     
     static void Main(string[] args)
