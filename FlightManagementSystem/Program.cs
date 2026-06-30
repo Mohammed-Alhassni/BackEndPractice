@@ -169,10 +169,21 @@ class Program
         
         foreach (Flight flight in DbContext.Flights)
         {
-            Console.WriteLine($"Flight ID: {flight.FlightId}, Flight Code: {flight.FlightCode}, Aircraft ID: {flight.AircraftId}, Pilot ID: {flight.PilotId}," +
-                              $" Origin: {flight.Origin}, Destination: {flight.Destination}, Departure Date: {flight.DepartureDate}, Departure Time: {flight.DepartureTime}," +
-                              $" Ticket Price: {flight.TicketPrice}, Available Seats: {flight.AvailableSeats},  Status: {flight.Status}");
+            Console.WriteLine($"==================================================");
+            Console.WriteLine($"▶ FLIGHT ID: {flight.FlightId}");
+            Console.WriteLine($"==================================================");
+            Console.WriteLine($"  • Code:         {flight.FlightCode}");
+            Console.WriteLine($"  • Aircraft ID:  {flight.AircraftId}");
+            Console.WriteLine($"  • Pilot ID:     {flight.PilotId}");
+            Console.WriteLine($"  • Route:        {flight.Origin} ➔ {flight.Destination}");
+            Console.WriteLine($"  • Schedule:     {flight.DepartureDate:yyyy-MM-dd} at {flight.DepartureTime}");
+            Console.WriteLine($"  • Price:        ${flight.TicketPrice:N2}");
+            Console.WriteLine($"  • Seats Left:   {flight.AvailableSeats}");
+            Console.WriteLine($"  • Status:       {flight.Status}");
+            Console.WriteLine($"==================================================\n");
+            
             //press key to exit 
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
     }
