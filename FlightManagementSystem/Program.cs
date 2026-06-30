@@ -198,6 +198,10 @@ class Program
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
+        
+        //press key to exit 
+        Console.Write("Press any key to continue...");
+        Console.ReadKey();
     }
     
     static void Main(string[] args)
