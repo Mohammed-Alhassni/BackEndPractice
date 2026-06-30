@@ -244,6 +244,24 @@ class Program
         }
         
         Pilot selectedPilot = aviablePilots.FirstOrDefault(pilot => pilot.PilotId == pilotId);
+        
+        Console.Write("Enter Flight Code: ");
+        String code = Console.ReadLine().Trim();
+        Console.Write("Enter Flight Origin: ");
+        String origin = Console.ReadLine().Trim();
+        Console.Write("Enter Flight Destination: ");
+        String destination = Console.ReadLine().Trim();
+        Console.Write("Enter Departure Date: ");
+        String depatrueDate = Console.ReadLine().Trim();
+        Console.Write("Enter Departure Time: : ");
+        String depatrueTime = Console.ReadLine().Trim();
+
+        if (code == "" || origin == "" || destination == ""  || depatrueDate == ""|| depatrueTime == "")
+        {
+            DelayedMessage("Empty string is not valid.");
+            return;
+        }
+
     }
     
     static void Main(string[] args)
