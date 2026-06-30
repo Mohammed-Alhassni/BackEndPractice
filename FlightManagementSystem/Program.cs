@@ -71,16 +71,22 @@ class Program
     public static void RegisterPassenger()
     {
         Console.Write("Enter Passenger Name: ");
-        String name = Console.ReadLine();
+        String name = Console.ReadLine().Trim();
         Console.Write("Enter Passenger Email: ");
-        String email = Console.ReadLine();
+        String email = Console.ReadLine().Trim();
         Console.Write("Enter Passenger Phone Number: ");
-        String phone = Console.ReadLine();
+        String phone = Console.ReadLine().Trim();
         Console.Write("Enter Passenger Passenger Number: ");
-        String passNum = Console.ReadLine();
+        String passNum = Console.ReadLine().Trim();
         Console.Write("Enter Passenger Nationality: ");
-        String nationality = Console.ReadLine();
-        
+        String nationality = Console.ReadLine().Trim();
+
+        if (name == "" || email == "" || phone == "" || passNum == "")
+        {
+            DelayedMessage("Empty string is not valid.");
+            return;
+        }
+
         DbContext.Passengers.Add(new Passenger()
         {
             PassengerId = DbContext.Passengers.Count() + 1,
