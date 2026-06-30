@@ -130,13 +130,19 @@ class Program
     public static void RegisterPilot()
     {
         Console.Write("Enter Pilot Name: ");
-        string name = Console.ReadLine();
+        string name = Console.ReadLine().Trim();
         Console.Write("Enter Pilot Phone Number: ");
-        string phone = Console.ReadLine();
+        string phone = Console.ReadLine().Trim();
         Console.Write("Enter License Number: ");
-        string licenseNum = Console.ReadLine();
+        string licenseNum = Console.ReadLine().Trim();
         Console.Write("Enter Flight Hours: ");
-        int flightHrs = int.Parse(Console.ReadLine());
+        bool isValidflightHrs = int.TryParse(Console.ReadLine(), out int flightHrs);
+        
+        if (name == "" || phone == "" || licenseNum == "" ||  isValidflightHrs == false || flightHrs <= 0)
+        {
+            DelayedMessage("Invalid Input.");
+            return;
+        }
         
         DbContext.Pilots.Add(new Pilot()
         {
