@@ -146,6 +146,7 @@ class Program
         
         DbContext.Pilots.Add(new Pilot()
         {
+            //Increment dynamcally
             PilotId =  DbContext.Pilots.Count() + 1,
             PilotName = name,
             PilotPhone = phone,
