@@ -280,7 +280,7 @@ class Program
             }
         );
         
-        Console.WriteLine($"Flight Added: ID: {selectedAircraft.AircraftId}");
+        Console.WriteLine($"Flight Added: ID: {DbContext.Flights.Count()}");
         
         //press key to exit
         Console.Write("Press any key to continue...");
