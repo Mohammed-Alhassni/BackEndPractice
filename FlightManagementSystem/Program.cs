@@ -104,9 +104,15 @@ class Program
     public static void AddAircraft()
     {
         Console.Write("Enter Aircraft Model: ");
-        string model = Console.ReadLine();
+        string model = Console.ReadLine().Trim();
         Console.Write("Enter Total Seats: ");
-        int seats = int.Parse(Console.ReadLine());
+        bool isValidSeat = int.TryParse(Console.ReadLine(), out int seats);
+
+        if (model == "" || isValidSeat == false || seats <= 0)
+        {
+            DelayedMessage("Invalid Model or Seat number is not valid.");
+            return;
+        }
         
         DbContext.Aircrafts.Add(new Aircraft()
         {
