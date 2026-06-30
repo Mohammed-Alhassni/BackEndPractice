@@ -97,8 +97,12 @@ class Program
             Nationality = nationality,
         });
         
-        DelayedMessage($"Passenger Added: ID: {DbContext.Passengers.Count()}");
-        //DelayedMessage($"Passenger Added: ID: {DbContext.Passengers[DbContext.Passengers.Count()-1].PassengerId}");
+        Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers.Count()}");
+        //Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers[DbContext.Passengers.Count()-1].PassengerId}");
+
+        //press key to exit
+        Console.Write("Press any key to continue...");
+        Console.ReadKey();
     }
 
     public static void AddAircraft()
@@ -123,8 +127,12 @@ class Program
         });
         
         
-        //DelayedMessage($"Aircraft Added: ID: {DbContext.Aircrafts[DbContext.Aircrafts.Count()-1].AircraftId}");
-        DelayedMessage($"Aircraft Added: ID: {DbContext.Aircrafts.Count()}");
+        //Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts[DbContext.Aircrafts.Count()-1].AircraftId}");
+        Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts.Count()}");
+        
+        //press key to exit
+        Console.Write("Press any key to continue...");
+        Console.ReadKey();
     }
 
     public static void RegisterPilot()
@@ -154,8 +162,12 @@ class Program
             FlightHours = flightHrs,
         });
         
-        //DelayedMessage($"Pilot Added: ID: {DbContext.Pilots[DbContext.Pilots.Count()-1].PilotId}");
-        DelayedMessage($"Pilot Added: ID: {DbContext.Pilots.Count()}");
+        //Console.WriteLine(($"Pilot Added: ID: {DbContext.Pilots[DbContext.Pilots.Count()-1].PilotId}");
+        Console.WriteLine($"Pilot Added: ID: {DbContext.Pilots.Count()}");
+        
+        //press key to exit
+        Console.Write("Press any key to continue...");
+        Console.ReadKey();
     } 
 
     public static void ViewFlights()
