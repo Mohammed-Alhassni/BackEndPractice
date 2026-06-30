@@ -196,10 +196,6 @@ class Program
             Console.WriteLine($"  • Seats Left:   {flight.AvailableSeats}");
             Console.WriteLine($"  • Status:       {flight.Status}");
             Console.WriteLine($"==================================================\n");
-            
-            //press key to exit 
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
         }
         
         //press key to exit 
