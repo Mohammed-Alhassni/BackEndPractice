@@ -1,0 +1,251 @@
+Task 1 — System Analysis: ANSWERS
+
+DOMAIN 1 — LIBRARY MANAGEMENT SYSTEM
+
+
+Entity Name: Book
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+bookId               int          System Generated
+title                string       User Input
+author               string       User Input
+genre                string       User Input
+totalCopies          int          User Input
+availableCopies      int          Default Value 
+totalBorrowCount     int          Default Value 
+
+
+Entity Name: Member
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+memberId             int          System Generated
+fullName             string       User Input
+phone                string       User Input
+email                string       User Input
+registrationDate     string       System Generated
+isActive             bool         Default Value 
+
+
+Entity Name: Loan
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+loanId               int          System Generated
+memberId             int          From List
+bookId               int          From List
+loanDate             string       System Generated
+dueDate              string       Calculated 
+returnDate           string       System Generated 
+isReturned           bool         Default Value 
+fine                 decimal      Calculated 
+
+
+Entity Name: Reservation
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+reservationId        int          System Generated
+memberId             int          From List
+bookId               int          From List
+reservationDate      string       System Generated
+status               string       Default Value 
+
+
+----------------------------------------------------------------
+STEP 2 — ENTITY RELATIONSHIPS
+----------------------------------------------------------------
+
+Relationship Cycle:
+
+1. A Member is registered in the system and assigned a unique memberId.
+
+2. Books are added to the library with a set number of physical copies. availableCopies starts equal to totalCopies.
+
+3. When a Member wants to borrow a Book, the system checks
+   availableCopies > 0. If yes, a Loan is created linking that Member
+   to that Book. availableCopies on the Book is decremented by 1, and
+   the Book's totalBorrowCount is incremented by 1.
+
+4. The Loan records the loanDate (today) and automatically calculates
+   the dueDate as loanDate + 14 days.
+
+5. When the Member returns the book, the Loan's returnDate is set to
+   today and isReturned is set to true. availableCopies on the Book is
+   incremented by 1. If returnDate > dueDate, the system calculates a
+   fine on the Loan based on days overdue.
+
+6. If a Book has 0 availableCopies, an interested Member can create a
+   Reservation. The Reservation is linked to that Member and Book with
+   status = "Pending". When a Loan for that Book is closed (book
+   returned), the system checks for pending Reservations on that Book
+   and notifies the next Member in queue, updating Reservation status
+   to "Notified".
+
+----------------------------------------------------------------
+STEP 3 — SERVICES
+----------------------------------------------------------------
+
+#   Service Name              What it does
+----------------------------------------------------------------
+1   RegisterMember            Creates a new Member record with a system-generated ID
+                              and today's registration date.
+
+2   AddBook                   Adds a new Book to the library catalogue with title,
+                              author, genre, and total copies; sets availableCopies
+                              equal to totalCopies.
+
+3   BorrowBook                Creates a Loan linking a Member to a Book, decrements
+                              availableCopies, increments totalBorrowCount, and
+                              calculates dueDate as today + 14 days.
+
+4   ReturnBook                Marks a Loan as returned, sets returnDate, increments
+                              availableCopies, and triggers fine calculation if late.
+
+5   CalculateFine             Computes the overdue fine for a Loan based on the number
+                              of days past the dueDate multiplied by the daily rate.
+
+6   ReserveBook               Creates a Reservation for a Member on a fully borrowed
+                              Book with status = "Pending".
+
+7   NotifyReservation         When a Book becomes available, finds the oldest Pending
+                              Reservation for that Book and updates its status to
+                              "Notified".
+
+8   ViewActiveLoans           Returns a list of all Loans where isReturned = false,
+                              for the librarian to see all books currently out.
+
+9   ViewOverdueLoans          Returns all active Loans where dueDate < today, sorted
+                              in descending order by how many days overdue each is.
+
+10  GetMostBorrowedBooks      Returns a ranked list of Books ordered by
+                              totalBorrowCount descending (most-borrowed first).
+
+
+================================================================
+DOMAIN 2 — HOTEL MANAGEMENT SYSTEM
+================================================================
+
+----------------------------------------------------------------
+STEP 1 
+----------------------------------------------------------------
+
+Guest
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+guestId              int          System Generated
+guestName            string       User Input
+guestPhone           string       User Input
+guestEmail           string       User Input
+guestNationality     string       User Input
+registrationDate     string       System Generated
+
+
+Room
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+roomId               int          System Generated
+roomNumber           string       User Input
+roomType             string       User Input (Single / Double / Suite)
+floorNumber          int          User Input
+nightlyPrice         decimal      User Input
+isAvailable          bool         Default Value (= true)
+
+
+Booking
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+bookingId            int          System Generated
+guestId              int          From List
+roomId               int          From List
+checkInDate          string       User Input
+checkOutDate         string       User Input
+numberOfNights       int          Calculated (checkOutDate - checkInDate)
+totalPrice           decimal      Calculated (numberOfNights × room.nightlyPrice)
+status               string       Default Value (= "Confirmed")
+
+
+CheckInRecord
+---------------------------------------------------------------
+Property Name        Data Type    Source Tag
+---------------------------------------------------------------
+recordId             int          System Generated
+bookingId            int          From List
+guestId              int          Calculated (copied from the linked Booking)
+roomId               int          Calculated (copied from the linked Booking)
+actualCheckIn        string       System Generated (timestamp when guest physically checks in)
+actualCheckOut       string       System Generated (timestamp when guest physically checks out; null until checkout)
+finalAmount          decimal      Calculated (numberOfNights × room.nightlyPrice, confirmed at checkout)
+
+
+----------------------------------------------------------------
+STEP 2 — ENTITY RELATIONSHIPS
+----------------------------------------------------------------
+
+Relationship Cycle:
+
+1. A Guest registers in the system and receives a unique guestId.
+
+2. Rooms are pre-loaded into the system by staff with their number,
+   type, floor, and nightly price. isAvailable starts as true.
+
+3. When a Guest wants to stay, the staff creates a Booking linking
+   the Guest (by guestId) to an available Room (by roomId). The
+   guest provides checkInDate and checkOutDate; the system calculates
+   numberOfNights and totalPrice from those values and the room's
+   nightlyPrice. The Booking status defaults to "Confirmed" and the
+   Room's isAvailable is set to false.
+
+4. A Booking can be cancelled before check-in. If cancelled, its
+   status changes to "Cancelled" and the Room's isAvailable is reset
+   to true, freeing it for new bookings immediately.
+
+5. When the guest physically arrives, a CheckInRecord is created
+   linked to the Booking. It copies guestId and roomId from the
+   Booking, and records actualCheckIn as the current timestamp.
+   The Booking status changes to "CheckedIn".
+
+6. When the guest departs, actualCheckOut is recorded on the
+   CheckInRecord, finalAmount is calculated, and the Booking status
+   changes to "CheckedOut". The Room's isAvailable is set back to
+   true so it can be booked again.
+
+----------------------------------------------------------------
+STEP 3 — SERVICES
+----------------------------------------------------------------
+
+#   Service Name              What it does
+----------------------------------------------------------------
+1   RegisterGuest             Creates a new Guest record with a system-generated ID
+                              and today's registration date.
+
+2   AddRoom                   Adds a new Room to the hotel system with its number,
+                              type, floor, nightly price, and isAvailable = true.
+
+3   BookRoom                  Creates a Booking linking a Guest to an available Room,
+                              calculates numberOfNights and totalPrice, sets
+                              isAvailable = false on the Room.
+
+4   CancelBooking             Changes a Booking's status to "Cancelled" and sets the
+                              linked Room's isAvailable back to true.
+
+5   CheckInGuest              Creates a CheckInRecord for a confirmed Booking,
+                              records actualCheckIn timestamp, and updates Booking
+                              status to "CheckedIn".
+
+6   CheckOutGuest             Records actualCheckOut timestamp on the CheckInRecord,
+                              calculates finalAmount, sets Booking status to
+                              "CheckedOut", and sets Room isAvailable = true.
+
+7   ViewAvailableRooms        Returns a list of all Rooms where isAvailable = true,
+                              optionally filtered by roomType.
+
+8   ViewActiveBookings        Returns all Bookings with status "Confirmed" or
+                              "CheckedIn" so staff can see current occupancy.
+
+9   GetGuestHistory           Returns all Bookings and CheckInRecords associated
+                              with a specific guestId.
