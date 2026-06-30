@@ -160,6 +160,13 @@ class Program
 
     public static void ViewFlights()
     {
+        //check if there is flights
+        if (DbContext.Flights.Count() == 0)
+        {
+            DelayedMessage("No Flights Found.");
+            return;
+        }
+        
         foreach (Flight flight in DbContext.Flights)
         {
             Console.WriteLine($"Flight ID: {flight.FlightId}, Flight Code: {flight.FlightCode}, Aircraft ID: {flight.AircraftId}, Pilot ID: {flight.PilotId}," +
