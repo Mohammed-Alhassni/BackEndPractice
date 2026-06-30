@@ -6,6 +6,7 @@ class Program
 {
     public static FMSContext DbContext = new FMSContext()
     {
+        //in memory snapshot of for the db raws 
         Aircrafts = new List<Aircraft>(),
         Bookings = new List<Booking>(),
         Flights = new List<Flight>(),
@@ -20,6 +21,7 @@ class Program
 
         while (interacting)
         {
+            //clear display before each menu render 
             Console.Clear();
             Console.WriteLine($"""
                                
@@ -84,6 +86,7 @@ class Program
         
         //Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers[DbContext.Passengers.Count()-1].PassengerId}");
         Console.WriteLine($"Passenger Added: ID: {DbContext.Passengers.Count()}");
+        //delay console clear so the message can stay longer 
         Thread.Sleep(2000);
     }
 
@@ -96,6 +99,7 @@ class Program
         
         DbContext.Aircrafts.Add(new Aircraft()
         {
+            //increment id dynamically
             AircraftId = DbContext.Aircrafts.Count() + 1,
             Model = model,
             TotalSeats = seats,
@@ -103,6 +107,7 @@ class Program
         
         //Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts[DbContext.Aircrafts.Count()-1].AircraftId}");
         Console.WriteLine($"Aircraft Added: ID: {DbContext.Aircrafts.Count()}");
+        //delay console clear so the message can stay longer 
         Thread.Sleep(2000);
     }
 
@@ -128,6 +133,7 @@ class Program
         
         //Console.WriteLine($"Pilot Added: ID: {DbContext.Pilots[DbContext.Pilots.Count()-1].PilotId}");
         Console.WriteLine($"Pilot Added: ID: {DbContext.Pilots.Count()}");
+        //delay console clear so the message can stay longer 
         Thread.Sleep(2000);
     } 
 
@@ -138,13 +144,14 @@ class Program
             Console.WriteLine($"Flight ID: {flight.FlightId}, Flight Code: {flight.FlightCode}, Aircraft ID: {flight.AircraftId}, Pilot ID: {flight.PilotId}," +
                               $" Origin: {flight.Origin}, Destination: {flight.Destination}, Departure Date: {flight.DepartureDate}, Departure Time: {flight.DepartureTime}," +
                               $" Ticket Price: {flight.TicketPrice}, Available Seats: {flight.AvailableSeats},  Status: {flight.Status}");
+            //press key to exit 
             Console.ReadKey();
         }
     }
     
     static void Main(string[] args)
     {
-        //Data seed 
+        //Data seed for testing 
         DbContext.Flights.Add(new Flight()
         {
             FlightId = 1,
@@ -160,6 +167,7 @@ class Program
             Status = "Scheduled"
         });
         
+        //entry point to the app 
         HomeMenu();
     }
 }
