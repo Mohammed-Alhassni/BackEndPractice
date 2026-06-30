@@ -244,9 +244,8 @@ class Program
         }
         
         Pilot selectedPilot = aviablePilots.FirstOrDefault(pilot => pilot.PilotId == pilotId);
-        
-        Console.Write("Enter Flight Code: ");
-        String code = Console.ReadLine().Trim();
+
+        string code = $"AA-{(DbContext.Flights.Count() + 1):D3}";
         Console.Write("Enter Flight Origin: ");
         String origin = Console.ReadLine().Trim();
         Console.Write("Enter Flight Destination: ");
@@ -255,10 +254,12 @@ class Program
         String depatrueDate = Console.ReadLine().Trim();
         Console.Write("Enter Departure Time: : ");
         String depatrueTime = Console.ReadLine().Trim();
+        Console.Write("Enter Ticket Price: ");
+        bool isValidPrice = decimal.TryParse(Console.ReadLine(), out decimal ticketPrice);
 
-        if (code == "" || origin == "" || destination == ""  || depatrueDate == ""|| depatrueTime == "")
+        if (origin == "" || destination == ""  || depatrueDate == ""|| depatrueTime == "" ||  ticketPrice <= 0 || !isValidPrice)
         {
-            DelayedMessage("Empty string is not valid.");
+            DelayedMessage("Invalid Input.");
             return;
         }
 
@@ -273,7 +274,7 @@ class Program
                 Destination = destination,
                 DepartureDate = depatrueDate,
                 DepartureTime = depatrueTime,
-                TicketPrice = 0,
+                TicketPrice = ticketPrice,
                 AvailableSeats = selectedAircraft.TotalSeats,
                 Status = "Scheduled",
             }
