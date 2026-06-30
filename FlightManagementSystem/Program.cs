@@ -230,6 +230,24 @@ class Program
         }
         
         Aircraft selectedAircraft = operationalAircrafts.FirstOrDefault(aircraft => aircraft.AircraftId == aircraftId);
+        
+        Console.WriteLine("Select Pilot ID: ");
+        
+        //Display options 
+        foreach (Pilot pilot in aviablePilots)
+        {
+            Console.WriteLine($"{pilot.PilotId}. Name: {pilot.PilotName}, Phone: {pilot.PilotPhone}, License Number:  {pilot.LicenseNumber}, Flight Hours: {pilot.FlightHours}");
+        }
+
+        bool isValidPilottId = int.TryParse(Console.ReadLine(), out int pilotId);
+
+        if (isValidPilottId == false || pilotId <= 0)
+        {
+            DelayedMessage("Invalid Pilot ID.");
+            return;
+        }
+        
+        Pilot selectedPilot = aviablePilots.FirstOrDefault(pilot => pilot.PilotId == pilotId);
     }
     
     static void Main(string[] args)
