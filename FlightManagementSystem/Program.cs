@@ -209,6 +209,27 @@ class Program
 
     public static void ScheduleFlight()
     {
+        //bring only operational flights and avaible pilots 
+        List<Aircraft> operationalAircrafts = DbContext.Aircrafts.Where(aircraft => aircraft.IsOperational).ToList();
+        List<Pilot> aviablePilots = DbContext.Pilots.Where(pilot => pilot.IsAvailable).ToList();
+        
+        Console.WriteLine("Select Aircraft ID: ");
+        
+        //Display options 
+        foreach (Aircraft aircraft in operationalAircrafts)
+        {
+            Console.WriteLine($"{aircraft.AircraftId}. Model: {aircraft.Model}, Total Seats: {aircraft.TotalSeats}");
+        }
+
+        bool isValidAircraftId = int.TryParse(Console.ReadLine(), out int aircraftId);
+
+        if (isValidAircraftId == false || aircraftId <= 0)
+        {
+            DelayedMessage("Invalid Aircraft ID.");
+            return;
+        }
+        
+        Aircraft selectedAircraft = operationalAircrafts.FirstOrDefault(aircraft => aircraft.AircraftId == aircraftId);
     }
     
     static void Main(string[] args)
