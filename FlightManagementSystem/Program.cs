@@ -262,6 +262,28 @@ class Program
             return;
         }
 
+        DbContext.Flights.Add(new Flight()
+            {
+                //Increment dynamically
+                FlightId = DbContext.Flights.Count() + 1,
+                FlightCode = code,
+                AircraftId = selectedAircraft.AircraftId,
+                PilotId = selectedPilot.PilotId,
+                Origin = origin,
+                Destination = destination,
+                DepartureDate = depatrueDate,
+                DepartureTime = depatrueTime,
+                TicketPrice = 0,
+                AvailableSeats = selectedAircraft.TotalSeats,
+                Status = "Scheduled",
+            }
+        );
+        
+        Console.WriteLine($"Flight Added: ID: {selectedAircraft.AircraftId}");
+        
+        //press key to exit
+        Console.Write("Press any key to continue...");
+        Console.ReadKey();
     }
     
     static void Main(string[] args)
