@@ -1,0 +1,44 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+    %% --- ENTITIES & ATTRIBUTE BINDINGS ---
+    
+    Student["Student"] --- StudentId["studentId PK"] & StudFullName["fullName"] & StudEmail["email UK"] & StudPhone["phoneNumber (Opt)"] & StudDOB["dateOfBirth"] & StudEnrollYear["enrollmentYear"] & StudGPA["gpa"]
+    
+    Instructor["Instructor"] --- InstructorId["instructorId PK"] & InstFullName["fullName"] & InstEmail["email UK"] & InstOffice["officeNumber (Opt)"] & InstHireDate["hireDate"] & InstSalary["salary"] & InstTitle["academicTitle"]
+    
+    Department["Department"] --- DepartmentId["departmentId PK"] & DeptName["departmentName UK"] & DeptBuilding["building (Opt)"] & DeptBudget["budget"] & DeptHeadId["headInstructorId FK (Opt)"]
+    
+    Course["Course"] --- CourseId["courseId PK"] & CourseCode["courseCode UK"] & CourseTitle["courseTitle"] & CreditHours["creditHours"] & CourseDeptId["departmentId FK"] & CourseInstId["instructorId FK (Opt)"] & SemesterOffered["semesterOffered"]
+    
+    Enrollment["Enrollment"] --- EnrollmentId["enrollmentId PK"] & EnrStudentId["studentId FK"] & EnrCourseId["courseId FK"] & EnrollmentDate["enrollmentDate"] & FinalGrade["finalGrade (Opt)"] & EnrStatus["status"]
+
+    %% --- RELATIONSHIPS ---
+    
+    %% Department - Instructor (Head) -> 1:1 Partial-Partial
+    Department -- 1 --> HeadRel{"Is Head Of"} -- 1 --> Instructor
+    
+    %% Department - Course -> 1:M (Total on Course, Partial on Dept)
+    Department -- 1 --> OffersRel{"Offers"} -- M --> Course
+    
+    %% Instructor - Course -> 1:M (Partial on both sides)
+    Instructor -- 1 --> TeachesRel{"Teaches"} -- M --> Course
+    
+    %% Student - Enrollment -> 1:M 
+    Student -- 1 --> StudEnrRel{"Has"} -- M --> Enrollment
+    
+    %% Course - Enrollment -> 1:M
+    Course -- 1 --> CourseEnrRel{"Contains"} -- M --> Enrollment
+
+    %% --- STYLING ---
+    class Student,Instructor,Department,Course,Enrollment entity
+    
+    class StudentId,InstructorId,DepartmentId,CourseId,EnrollmentId keyAttribute
+    
+    class StudFullName,StudEmail,StudPhone,StudDOB,StudEnrollYear,StudGPA,InstFullName,InstEmail,InstOffice,InstHireDate,InstSalary,InstTitle,DeptName,DeptBuilding,DeptBudget,DeptHeadId,CourseCode,CourseTitle,CreditHours,CourseDeptId,CourseInstId,SemesterOffered,EnrStudentId,EnrCourseId,EnrollmentDate,FinalGrade,EnrStatus attribute
+
+    classDef entity fill:#1f77b4,stroke:#0d47a1,stroke-width:2px,color:#fff,font-weight:bold
+    classDef attribute fill:#f0f4c3,stroke:#afb42b,stroke-width:1px,color:#000
+    classDef keyAttribute fill:#d1c4e9,stroke:#512da8,stroke-width:2px,color:#000,font-weight:bold
