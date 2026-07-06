@@ -1,0 +1,45 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+    %% --- ENTITIES & ATTRIBUTE BINDINGS ---
+    
+    User["User"] --- UserId["userId PK"] & Username["username UK"] & Email["email UK"] & PasswordHash["passwordHash"] & FullName["fullName"] & Phone["phoneNumber (Opt)"] & Address["address (Opt)"] & RegDate["registrationDate"] & IsActive["isActive"]
+    
+    Category["Category"] --- CategoryId["categoryId PK"] & CategoryName["categoryName UK"] & CatDescription["description (Opt)"] & CatImageUrl["imageUrl (Opt)"]
+    
+    Product["Product"] --- ProductId["productId PK"] & ProductName["productName"] & ProdDescription["description (Opt)"] & Price["price"] & StockQuantity["stockQuantity"] & ProdImageUrl["imageUrl (Opt)"] & ProdCategoryId["categoryId FK"] & CreatedAt["createdAt"] & IsAvailable["isAvailable"]
+    
+    Order["Order"] --- OrderId["orderId PK"] & OrderUserId["userId FK"] & OrderDate["orderDate"] & TotalAmount["totalAmount"] & Status["status"] & ShippingAddress["shippingAddress"] & PaymentMethod["paymentMethod"]
+    
+    Review["Review"] --- ReviewId["reviewId PK"] & RevUserId["userId FK"] & RevProductId["productId FK"] & Rating["rating"] & Comment["comment (Opt)"] & ReviewDate["reviewDate"]
+
+    %% --- RELATIONSHIPS & RELATION REJECTED ATTRIBUTES ---
+    
+    %% User - Order -> 1:M (Partial on User, Total on Order)
+    User -- 1 --> PlacesRel{"Places"} -- M --> Order
+    
+    %% Category - Product -> 1:M (Partial on Category, Total on Product)
+    Category -- 1 --> BelongsRel{"Contains"} -- M --> Product
+    
+    %% User - Review -> 1:M (Partial on User, Total on Review)
+    User -- 1 --> WritesRel{"Writes"} -- M --> Review
+    
+    %% Product - Review -> 1:M (Partial on Product, Total on Review)
+    Product -- 1 --> HasRel{"Receives"} -- M --> Review
+    
+    %% Order - Product -> M:N (Total on Order, Partial on Product) with 'quantity' attribute
+    Order -- M --> ContainsRel{"Contains"} -- N --> Product
+    ContainsRel --- Quantity["quantity"]
+
+    %% --- STYLING ---
+    class User,Category,Product,Order,Review entity
+    
+    class UserId,CategoryId,ProductId,OrderId,ReviewId keyAttribute
+    
+    class Username,Email,PasswordHash,FullName,Phone,Address,RegDate,IsActive,CategoryName,CatDescription,CatImageUrl,ProductName,ProdDescription,Price,StockQuantity,ProdImageUrl,ProdCategoryId,CreatedAt,IsAvailable,OrderUserId,OrderDate,TotalAmount,Status,ShippingAddress,PaymentMethod,RevUserId,RevProductId,Rating,Comment,ReviewDate,Quantity attribute
+
+    classDef entity fill:#1f77b4,stroke:#0d47a1,stroke-width:2px,color:#fff,font-weight:bold
+    classDef attribute fill:#f0f4c3,stroke:#afb42b,stroke-width:1px,color:#000
+    classDef keyAttribute fill:#d1c4e9,stroke:#512da8,stroke-width:2px,color:#000,font-weight:bold
