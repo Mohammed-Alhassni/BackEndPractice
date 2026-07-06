@@ -14,6 +14,6 @@ namespace ECommerceSystem.Models
         public string PhoneNumber { get; set; } //user input 
         public string Address { get; set; } //user input 
         public DateTime RegistrationDate { get; set; } //system generated 
-        public bool isActive { get; set; } = true;  //default value 
+        public bool IsActive { get; set; } = true;  //default value 
     }
 }
