@@ -37,7 +37,7 @@ namespace ECommerceSystem.Models
         public bool IsActive { get; set; } = true;  //default value
         
         //reverse navigation
-        public Order Order { get; set; }
+        public List<Order> Orders { get; set; }
         //reverse navigation
         public List<Review> Reviews { get; set; } 
 
