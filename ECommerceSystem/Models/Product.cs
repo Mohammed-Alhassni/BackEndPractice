@@ -34,5 +34,8 @@ namespace ECommerceSystem.Models
         [Required]
         public DateTime CreatedAt { get; set; } //system generated 
         public bool IsAvaiable { get; set; } = true; //default value 
+        
+        //reverse navigation
+        public List<Review> Reviews { get; set; } 
     }
 }

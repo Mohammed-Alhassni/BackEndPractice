@@ -38,5 +38,8 @@ namespace ECommerceSystem.Models
         
         //reverse navigation
         public Order Order { get; set; }
+        //reverse navigation
+        public List<Review> Reviews { get; set; } 
+
     }
 }
