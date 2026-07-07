@@ -30,5 +30,7 @@ namespace ECommerceSystem.Models
         [MaxLength(50)]
         public string PaymentMethod { get; set; } //user input 
 
+        //reverse navigation
+        public List<ItemOrder> ItemOrders { get; set; }
     }
 }
