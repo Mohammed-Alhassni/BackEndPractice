@@ -9,7 +9,7 @@ namespace ECommerceSystem.Models
         public int ProductId { get; set; } //system generated 
         public string ProductName { get; set; } //user input 
         public string Description { get; set; } //user input 
-        public decimal Price { get; set; } //user input 
+        public double Price { get; set; } //user input 
         public int StockQuantity { get; set; } = 0; //default value 
         public string ImageUrl { get; set; } //user input 
         public int CategoryId { get; set; } //from list 
