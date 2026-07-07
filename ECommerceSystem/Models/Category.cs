@@ -21,5 +21,8 @@ namespace ECommerceSystem.Models
         [MaxLength(300)]
         public string ImageUrl { get; set; } //user input 
 
+        //reverse navigation
+        public List<Product> Products { get; set; }
+
     }
 }
