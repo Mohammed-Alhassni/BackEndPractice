@@ -19,8 +19,8 @@ namespace ECommerceSystem.Models
         public string Description { get; set; } //user input 
         [Required]
         [Column(TypeName = "decimal(10,2)")]
-        [Range(0.1, double.MaxValue)]
-        public double Price { get; set; } //user input 
+        [Range(0.1, (double)decimal.MaxValue)]
+        public decimal Price { get; set; } //user input 
         [Required]
         [Range(0, int.MaxValue)]
         public int StockQuantity { get; set; } = 0; //default value 
