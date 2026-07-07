@@ -34,6 +34,9 @@ namespace ECommerceSystem.Models
         public string Address { get; set; } //user input 
         [Required]
         public DateTime RegistrationDate { get; set; } = DateTime.UtcNow; //system generated 
-        public bool IsActive { get; set; } = true;  //default value 
+        public bool IsActive { get; set; } = true;  //default value
+        
+        //reverse navigation
+        public Order Order { get; set; }
     }
 }
