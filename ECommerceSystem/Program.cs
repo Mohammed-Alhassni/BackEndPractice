@@ -25,7 +25,7 @@ namespace ECommerceSystem
                 Console.Clear();
                 Console.WriteLine($"""
                                
-                               1. 
+                               1. Register New User
                                2. 
                                3. 
                                4. 
@@ -42,7 +42,7 @@ namespace ECommerceSystem
                 switch (option)
                 {
                     case 1:
-                        
+                        RegisterUser();
                         break;
                     case 2:
                         
@@ -62,6 +62,11 @@ namespace ECommerceSystem
                 }
 
             }
+        }
+
+        public static void RegisterUser()
+        {
+
         }
 
         static void Main(string[] args)
