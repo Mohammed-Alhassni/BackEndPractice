@@ -14,5 +14,10 @@ namespace ECommerceSystem
         public DbSet<Product> Products { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer("Server=localhost; Database=ECommerceDB;Trusted_Connection=True;TrustServerCertificate=True;");
+        }
     }
 }
