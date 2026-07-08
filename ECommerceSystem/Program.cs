@@ -107,7 +107,14 @@ namespace ECommerceSystem
 
         public static void RegisterUser()
         {
-
+            Console.Write("Enter username: ");
+            string userName = Console.ReadLine() ?? "";
+            Console.Write("Enter email: ");
+            string email = Console.ReadLine() ?? "";
+            Console.Write("Enter password: ");
+            string passwordHash = QuickHash(MaskInput());
+            Console.Write("Enter full name: ");
+            string fullName = Console.ReadLine() ?? "";
         }
 
         static void Main(string[] args)
