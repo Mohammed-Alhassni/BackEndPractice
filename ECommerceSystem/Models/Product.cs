@@ -27,7 +27,7 @@ namespace ECommerceSystem.Models
         [MaxLength(300)]
         public string ImageUrl { get; set; } //user input 
         [Required]
-        [ForeignKey("CategoryId")] //forign key contraint 
+        [ForeignKey("Category")] //forign key contraint 
         public int CategoryId { get; set; } //from list 
         //navigation property
         public Category Category { get; set; }
