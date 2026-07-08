@@ -42,6 +42,9 @@ namespace ECommerceSystem
 
         public static string QuickHash(string input)
         {
+            //empty string will not be hashed, then it will be detected in validation
+            if (input == "") { return ""; }
+
             // Convert string text into raw bytes
             byte[] inputBytes = Encoding.UTF8.GetBytes(input);
 
