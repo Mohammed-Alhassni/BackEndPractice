@@ -14,6 +14,29 @@ namespace ECommerceSystem
             Thread.Sleep(delay);
         }
 
+        public static string MaskInput()
+        {
+            // Masked password input logic
+            string masked = "";
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter) break;
+                if (key.Key == ConsoleKey.Backspace && masked.Length > 0)
+                {
+                    masked = masked[..^1];
+                    Console.Write("\b \b");
+                }
+
+                else if (!char.IsControl(key.KeyChar))
+                {
+                    masked += key.KeyChar;
+                    Console.Write("*");
+                }
+            }
+            return masked;
+        }
+
         public static void HomeMenu()
         {
             bool interacting = true;
