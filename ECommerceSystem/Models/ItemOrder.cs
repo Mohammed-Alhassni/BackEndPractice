@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ECommerceSystem.Models;
 
-internal class ItemOrder
+public class ItemOrder
 {
 
     //////////////////////////////////////////

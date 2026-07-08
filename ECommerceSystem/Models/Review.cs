@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ECommerceSystem.Models
 {
-    internal class Review
+    public class Review
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

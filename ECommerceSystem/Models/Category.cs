@@ -8,7 +8,7 @@ using System.Text;
 namespace ECommerceSystem.Models
 {
     [Index(nameof(CategoryName), IsUnique =true)]
-    internal class Category
+    public class Category
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

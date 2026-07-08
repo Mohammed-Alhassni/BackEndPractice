@@ -9,7 +9,7 @@ namespace ECommerceSystem.Models
 {
     [Index(nameof(UserName), IsUnique =true)]
     [Index(nameof(Email), IsUnique = true)]
-    internal class User
+    public class User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
