@@ -66,7 +66,7 @@ namespace ECommerceSystem
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            HomeMenu();
         }
     }
 }
