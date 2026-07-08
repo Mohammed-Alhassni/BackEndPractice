@@ -16,7 +16,7 @@ namespace ECommerceSystem.Models
         public int UserId { get; set; } //from list 
         public User User { get; set; } //navigation property
         [Required]
-        public DateTime OrderDate { get; set; } //system generated
+        public DateTime OrderDate { get; set; } = DateTime.UtcNow; //system generated
         [Required]
         [Range(0, (double)decimal.MaxValue)] //cast to double because Range() expects double
         public decimal TotalAmount { get; set; } //user input

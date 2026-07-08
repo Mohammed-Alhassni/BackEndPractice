@@ -32,7 +32,7 @@ namespace ECommerceSystem.Models
         //navigation property
         public Category Category { get; set; }
         [Required]
-        public DateTime CreatedAt { get; set; } //system generated 
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow; //system generated 
         public bool IsAvaiable { get; set; } = true; //default value 
         
         //reverse navigation

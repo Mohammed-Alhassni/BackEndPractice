@@ -25,6 +25,6 @@ namespace ECommerceSystem.Models
         [MaxLength(1000)]
         public string Comment { get; set; } //user input
         [Required]
-        public DateTime ReviewTime { get; set; } //system generated 
+        public DateTime ReviewTime { get; set; } = DateTime.UtcNow; //system generated 
     }
 }
