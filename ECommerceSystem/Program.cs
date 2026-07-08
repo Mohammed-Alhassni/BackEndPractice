@@ -1,5 +1,8 @@
 ﻿
 
+using System.Security.Cryptography;
+using System.Text;
+
 namespace ECommerceSystem
 {
     public class Program
@@ -35,6 +38,18 @@ namespace ECommerceSystem
                 }
             }
             return masked;
+        }
+
+        public static string QuickHash(string input)
+        {
+            // Convert string text into raw bytes
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+            // Compute the SHA256 hash bytes
+            byte[] hashBytes = SHA256.HashData(inputBytes);
+
+            // Convert the bytes into a readable, clean hex string
+            return Convert.ToHexString(hashBytes);
         }
 
         public static void HomeMenu()
